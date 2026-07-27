@@ -1,0 +1,10 @@
+```{r}
+
+library(tidyverse)
+library(xlsx)
+library(admixr)
+library(syntenyPlotteR)
+library(pals)
+library(gtools)
+
+```
