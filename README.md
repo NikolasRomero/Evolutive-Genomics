@@ -1,1 +1,1 @@
-Course perfotmed in July 2026 provided by the SSanger Institute investigators
+Course perfotmed in July 2026 provided by the Sanger Institute investigators
