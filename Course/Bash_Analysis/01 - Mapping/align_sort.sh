@@ -1,6 +1,7 @@
 #!/bin/sh
 
-INDS=($(for i in ~/filteredReads/*.R1.trimmed.fastq.gz; do echo $(basename ${i%.R*}); done))
+INDS=($(for i in /scratchsan/C_computacion/nr10sanger_ac/biodiversity_genomics_course/data/Heliconius/WGS/filteredReads/*.R1.trimmed.fastq.gz; do echo $(basename ${i%.R*}); done))
+
 for IND in ${INDS[@]};
 do
 	# declare variables
