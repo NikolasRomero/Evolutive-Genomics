@@ -6,7 +6,7 @@ do
 	REF=~/reference/GCA_917862395.2_iHelSar1.2_genomic.fna
 	FORWARD=~/filteredReads/${IND}.R1.trimmed.fastq.gz
 	REVERSE=~/filteredReads/${IND}.R2.trimmed.fastq.gz
-	OUTPUT=~/align/${IND}_sort.bam
+	OUTPUT=~/reference/align/${IND}_sort.bam
 
 	# read group string, required by Picard MarkDuplicates and GATK
 	RG="@RG\tID:${IND}\tSM:${IND}\tPL:ILLUMINA\tLB:${IND}"
