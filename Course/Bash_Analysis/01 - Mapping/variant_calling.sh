@@ -24,3 +24,13 @@ cd  vcf_real
 # copy the sara_sapho file from the share directory
 cp /scratchsan/C_computacion/nr10sanger_ac/biodiversity_genomics_course/data/Heliconius/VCF/sara_sapho_subset.vcf.gz ./
 
+# you might need to define the variable again if you did it in the 'screen'
+BCFTOOLS_PATH=/scratchsan/C_computacion/nr10sanger_ac/miniconda3/envs/bcftools_m/bin/
+
+$BCFTOOLS_PATH/bcftools view -h sara_sapho_subset.vcf.gz
+
+# Index VCF
+
+$BCFTOOLS_PATH/bcftools index sara_sapho_subset.vcf.gz
+
+
