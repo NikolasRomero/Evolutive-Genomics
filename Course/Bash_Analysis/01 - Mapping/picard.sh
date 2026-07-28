@@ -1,3 +1,5 @@
+#!/bin/bash
+
  conda activate picard
 
  picard MarkDuplicates REMOVE_DUPLICATES=true \
@@ -7,7 +9,7 @@
  OUTPUT=wgs1.sort.rmd.bam \
  METRICS_FILE=wgs1.rmd.bam.metrics
 
-  picard MarkDuplicates REMOVE_DUPLICATES=true \
+ picard MarkDuplicates REMOVE_DUPLICATES=true \
  ASSUME_SORTED=true VALIDATION_STRINGENCY=SILENT \
  MAX_FILE_HANDLES_FOR_READ_ENDS_MAP=1000 \
  INPUT=wgs2_sort.bam \
