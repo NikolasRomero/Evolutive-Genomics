@@ -13,7 +13,7 @@ do
 
 	# then align and sort
 	echo "Aligning $IND with bwa"
-	$BWA_PATH/bwa mem -t 4 -R "${RG}" $REF $FORWARD \
+	$BWA_PATH/bwa mem -t 4 $REF $FORWARD \
 	$REVERSE | samtools view -b | \
 	samtools sort -T ${IND} > $OUTPUT
 done
