@@ -1,3 +1,5 @@
+#!/bin/sh
+
 INDS=($(for i in ~/filteredReads/*.R1.trimmed.fastq.gz; do echo $(basename ${i%.R*}); done))
 for IND in ${INDS[@]};
 do
