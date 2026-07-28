@@ -18,3 +18,9 @@ ${BCFTOOLS_PATH}/bcftools mpileup -a AD,DP,SP -Ou -f $REF \
 ~/reference/align/*.sort.rmd.bam | ${BCFTOOLS_PATH}/bcftools call -f GQ,GP \
 -mO z -o ./sara_sapho.vcf.gz
 
+#Create a folder called vcf_Real
+mkdir vcf_real
+cd  vcf_real
+# copy the sara_sapho file from the share directory
+cp /scratchsan/C_computacion/nr10sanger_ac/biodiversity_genomics_course/data/Heliconius/VCF/sara_sapho_subset.vcf.gz ./
+
