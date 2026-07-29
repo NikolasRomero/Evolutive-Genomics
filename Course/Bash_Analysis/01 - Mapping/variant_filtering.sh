@@ -32,3 +32,20 @@ vcftools --gzvcf $VCF --depth --out $OUT
 
 vcftools --gzvcf $VCF --het --out $OUT
 
+## Filtering
+
+cd vcf_real
+
+VCF_IN=sara_sapho_subset.vcf.gz
+VCF_OUT=sara_sapho_filtered.vcf.gz
+
+module load envs/anaconda3
+conda activate vcftools
+
+
+# perform the filtering with vcftools
+vcftools --gzvcf $VCF_IN \
+--remove-indv D5252__Hvenez --remove-indv R_843__Hccong_L3 \
+--remove-indels --max-missing 0.75 --minQ 30 --min-meanDP 10 --max-meanDP 30 \
+--minDP 10 --minGQ 20 \
+--recode --stdout | gzip -c > $VCF_OUT
