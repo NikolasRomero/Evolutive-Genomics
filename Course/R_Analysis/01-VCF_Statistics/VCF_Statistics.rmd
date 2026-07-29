@@ -1,1 +1,19 @@
+```{r}
+
+##Mean Variable Depth
+
+var_depth <- read_delim("sara_sapho.ldepth.mean", delim = "\t",
+                        col_names = c("chr", "pos", "mean_depth", "var_depth"), skip = 1)
+
+## Ploting
+
+a <- ggplot(var_depth, aes(mean_depth)) + geom_density(fill = "dodgerblue1", colour = "black", alpha = 0.3)
+a + theme_light() + xlim(0, 100)
+
+## Summary
+
+summary(var_depth$mean_depth)
+
+```
+
 
