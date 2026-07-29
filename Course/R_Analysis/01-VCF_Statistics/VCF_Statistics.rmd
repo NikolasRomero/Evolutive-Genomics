@@ -16,4 +16,57 @@ summary(var_depth$mean_depth)
 
 ```
 
+```{r}
 
+## Variant missingness
+
+var_miss <- read_delim("sara_sapho.lmiss", delim = "\t",
+                       col_names = c("chr", "pos", "nchr", "nfiltered", "nmiss", "fmiss"), skip = 1)
+
+
+## Plotting
+
+b <- ggplot(var_miss, aes(fmiss)) + geom_density(fill = "dodgerblue1", colour = "black", alpha = 0.3)
+b + theme_light()
+
+## Summary
+
+summary(var_miss$fmiss)
+
+
+```
+
+```{r}
+## Individual based statistics
+
+  ## Mean dept per individual
+  
+    ind_depth <- read_delim("sara_sapho.idepth", delim = "\t",
+                        col_names = c("ind", "nsites", "depth"), skip = 1)
+  
+    ## Plotting
+
+    c <- ggplot(ind_depth, aes(depth)) + geom_histogram(fill = "dodgerblue1", colour = "black", alpha = 0.3)
+    c + theme_light()
+
+  ## Proportion of missing data per individual
+
+    ind_miss  <- read_delim("sara_sapho.imiss", delim = "\t",
+                        col_names = c("ind", "ndata", "nfiltered", "nmiss", "fmiss"), skip = 1)
+
+    ## Plotting
+
+    d <- ggplot(ind_miss, aes(fmiss)) + geom_histogram(fill = "dodgerblue1", colour = "black", alpha = 0.3)
+    d + theme_light()
+
+  ## Depth vs Missing Data
+ 
+    ind_joint <- ind_depth %>%
+    inner_join(ind_miss, by = "ind")
+    
+    ## Plotting
+
+    e <- ggplot(ind_joint, aes(x=fmiss,y=depth)) + geom_point() 
+    e + theme_light() 
+
+```
