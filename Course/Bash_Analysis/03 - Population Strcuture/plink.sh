@@ -45,7 +45,31 @@ plink2 \
     --pca \
     --out ${VCF}
 
+# prune snps based on linkage disequilibrium (LD)
+plink2 \
+--vcf $VCF \
+--threads 8 \
+--allow-extra-chr \
+--bad-ld \
+--set-missing-var-ids @:# \
+--min-alleles 2 \
+--max-alleles 2 \
+--mac 2 \
+--indep-pairwise 50 10 0.2 \
+--out $VCF
 
+# extract LD-pruned sites
+plink2 \
+--vcf $VCF \
+--threads 8 \
+--allow-extra-chr \
+--set-missing-var-ids @:# \
+--min-alleles 2 \
+--max-alleles 2 \
+--mac 2 \
+--extract $VCF.prune.in \
+--export vcf id-paste=iid \
+--out $VCF.ld_prune
 
 
 
