@@ -1,0 +1,56 @@
+```{r}
+
+# read in data
+pca <- read_table("sara_sapho_filtered_maf0.05_pruned.eigenvec", col_names = TRUE)
+eigenval <- scan("sara_sapho_filtered_maf0.05_pruned.eigenval")
+info <- read_table("sara_sapho_info.txt", col_names = TRUE)
+
+# set names
+names(pca)[1] <- "ind"
+names(pca)[2:ncol(pca)] <- paste0("PC", 1:(ncol(pca)-1))
+
+# add the species information
+pca <- as_tibble(merge(pca, info, by="ind"))
+
+## Plotting
+
+# first convert to percentage variance explained
+pve <- data.frame(PC = 1:length(eigenval), pve = eigenval/sum(eigenval)*100)
+
+# make scree plot
+ggplot(pve, aes(PC, pve)) + geom_bar(stat = "identity") +
+  ylab("Percentage variance explained") + theme_light()
+
+# calculate the cumulative sum of the percentage variance explained
+cumsum(pve$pve)
+
+# plot pca
+pca_a <- ggplot(pca, aes(PC1, PC2, col = pop)) + geom_point(size = 3) +
+    coord_equal() + theme_light() +
+    xlab(paste0("PC1 (", signif(pve$pve[1], 3), "%)")) +
+    ylab(paste0("PC2 (", signif(pve$pve[2], 3), "%)"))
+
+pca_a
+
+# color by Species
+pca_b <- ggplot(pca, aes(PC1, PC2, col = Species, label = pop)) + geom_point(size = 3) +
+  coord_equal() + theme_light() +
+  xlab(paste0("PC1 (", signif(pve$pve[1], 3), "%)")) +
+  ylab(paste0("PC2 (", signif(pve$pve[2], 3), "%)")) + 
+  geom_text()
+
+pca_b
+
+# color by Clade
+pca_c <- ggplot(pca, aes(PC1, PC2, col = Clade, label=Species)) + geom_point(size = 3) +
+  coord_equal() + theme_light() +
+  xlab(paste0("PC1 (", signif(pve$pve[1], 3), "%)")) +
+  ylab(paste0("PC2 (", signif(pve$pve[2], 3), "%)")) +
+  geom_text_repel()
+
+pca_c
+
+
+
+
+```
