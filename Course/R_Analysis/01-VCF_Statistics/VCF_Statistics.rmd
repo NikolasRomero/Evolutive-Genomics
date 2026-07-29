@@ -69,4 +69,14 @@ summary(var_miss$fmiss)
     e <- ggplot(ind_joint, aes(x=fmiss,y=depth)) + geom_point() 
     e + theme_light() 
 
+  ## Heterozygocity
+
+    ind_het <- read_delim("sara_sapho.het", delim = "\t",
+           col_names = c("ind","ho", "he", "nsites", "f"), skip = 1)
+
+    ## Plotting
+
+    f <- ggplot(ind_het, aes(f)) + geom_histogram(fill = "dodgerblue1", colour = "black", alpha = 0.3)
+    f + theme_light()
+
 ```
