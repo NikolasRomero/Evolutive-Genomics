@@ -1,1 +1,42 @@
+```{r}
 
+genes = read.csv('"~/Yo/EvoGen/Evo Gen/genome_scans/colorPatternGenes.csv")
+
+# Prepare input files:
+# Read in the file with sliding window estimates of FST, pi and dxy
+windowStats<-read.csv("Hmel218003o.popgen.w20s20.csv.gz",header=T)
+
+# Read in the fd and fdM estimates of 20 kb windows
+fstats <- read.csv("Hmel218003o.dstats.w20s20.csv.gz",header=T,na.strings = "NaN")
+
+# Let's have a look at the FST and fdM datasets
+head(windowStats)
+head(fstats)
+
+# Let's plot FST, dxy and fd between the two younger species
+fst_plot = ggplot(windowStats,aes(mid/1000000, Fst_Hmel.mal.col_Hmel.ama.per))+
+  geom_point(data = genesSub, aes(x=(start+end)/2000000, y=1), col='red', shape=25) +
+  geom_vline(data = genesSub, aes(xintercept=(start+end)/2000000 ), col='red') +
+  geom_point() +
+  scale_x_continuous(limits=c(0,NA), expand = c(0.01,0.01), breaks=seq(0,100,1), name="Chromosome Position (Mb)") +
+  scale_y_continuous(name=expression(F[ST])) 
+fst_plot
+
+dxy_plot = ggplot(windowStats, aes(mid/1000000, dxy_Hmel.mal.col_Hmel.ama.per*100))+
+  geom_vline(data = genesSub, aes(xintercept=(start+end)/2000000 ), col='red') +
+  geom_point() +
+  scale_x_continuous(limits=c(0,NA), expand = c(0.01,0.01), breaks=seq(0,100,1), name="Chromosome Position (Mb)") +
+  scale_y_continuous(name=expression(d[XY]))
+dxy_plot
+
+fdm_plot = ggplot(fstats, aes(mid/1000000, fdM)) +
+  geom_vline(data = genesSub, aes(xintercept=(start+end)/2000000 ), col='red') +
+  # geom_point(data = genesSub, aes(x=(start+end)/2000000, y=1), col='red', shape=25) +
+  geom_point() +
+  scale_x_continuous(limits=c(0,NA), expand = c(0.01,0.01), breaks=seq(0,100,1), name="Chromosome Position (Mb)")
+
+
+# Let's compare the stats on chr18 next to each other
+plot_grid(fst_plot, dxy_plot, fdm_plot, nrow=3, align='hv')
+
+```
