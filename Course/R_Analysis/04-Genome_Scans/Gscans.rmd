@@ -1,6 +1,7 @@
 ```{r}
 
 genes = read.csv('"~/Yo/EvoGen/Evo Gen/genome_scans/colorPatternGenes.csv")
+genesSub = subset(genes, scaffold == 'Hmel218003o')
 
 # Prepare input files:
 # Read in the file with sliding window estimates of FST, pi and dxy
