@@ -1,4 +1,5 @@
 
+
 # Copy the popgen and dstat files to your local computer
 scp -r -J <user>@168.176.34.122 <user>@perseus:/scratchsan/C_computacion/<user>/genome_scans/popgen.w20s20.csv.gz .
 scp -r -J <user>@168.176.34.122 <user>@perseus:/scratchsan/C_computacion/<user>/genome_scans/dstats.w20s20.csv.gz .
